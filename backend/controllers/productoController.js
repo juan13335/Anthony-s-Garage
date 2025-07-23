@@ -22,4 +22,34 @@ const crearProducto = async (req, res) => {
     };
 
 
-    export { crearProducto , obtenerProducto };
+const actualizarProducto = async (req, res) => {
+    const {id} = req.params
+    const {nombre, precio, proveedor} = req.params.body
+    try {
+        const producto = ProductosAtributos.findByPk(id);
+        if (!producto) {
+            return res.status(404).json({error : "No se encontro el producto"})
+        };
+        producto.nombre = nombre
+        producto.precio = precio 
+        producto.proveedor = proveedor
+        await producto.save();
+        res.json(categoria);
+        
+    } catch (error) {
+        return res.status(400).json({error : error.message})
+    } 
+}
+
+
+const eliminarProducto = async (req, res) => {
+    const {id} = req.params
+    try {
+        await ProductosAtributos.destroy({where : {id} })
+        res.status(204).send()
+    } catch (error) {
+        return res.status(500).json({error : error.message})
+    }
+}
+
+    export { crearProducto , obtenerProducto, actualizarProducto, eliminarProducto};
