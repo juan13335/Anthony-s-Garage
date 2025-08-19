@@ -4,8 +4,8 @@ import { obtenerCategorias, crearCategoria, actualizarCategoria, eliminarCategor
 const router = express.Router();
 
 router.get('/categorias', obtenerCategorias);
-router.post('/crearcategoria', crearCategoria);
-router.put('/actualizarcategoria/:id', actualizarCategoria);
+router.post('/categorias', crearCategoria);
+router.put('/categorias/:id', actualizarCategoria);
 router.delete('/categorias/:id', eliminarCategoria);
 router.get('/categorias/:id/productos-asociados', cantidadProductos)
 
