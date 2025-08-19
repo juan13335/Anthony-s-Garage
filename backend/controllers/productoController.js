@@ -52,4 +52,4 @@ const eliminarProducto = async (req, res) => {
     }
 }
 
-    export { crearProducto , obtenerProducto, actualizarProducto, eliminarProducto};
+export { crearProducto , obtenerProducto, actualizarProducto, eliminarProducto};
