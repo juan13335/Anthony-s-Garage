@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
 import { productosService } from '../services/productos.service'
+import { categoriaService } from '../services/categorias.service';
 function ProductosTabla() {
     const [productos, setProductos] = useState([]);
+    const [categorias, setCategorias] = useState([]);
 
+  
     useEffect(() => {
         obtenerProductos();
+        obtenerCategorias();
     }, [])
 
   async function obtenerProductos(e) {
@@ -13,6 +17,15 @@ function ProductosTabla() {
     setProductos(data)
   }
 
+  async function obtenerCategorias() {
+    let data = await categoriaService.getCategorias();
+    setCategorias(data);
+  }
+
+  function obtenerNombreCategoria(id) {
+    const categoria = categorias.find(cat => cat.id === id);
+    return categoria ? categoria.nombre : id;
+  }
 
     return(
         <div className="table-responsive">
@@ -35,7 +48,7 @@ function ProductosTabla() {
                     <td>{producto.nombre}</td>
                     <td>{producto.proveedor}</td>
                     <td>{producto.precio}</td>
-                    <td>{producto.categoriaId}</td>
+                    <td>{obtenerNombreCategoria(producto.categoriaId)}</td>
                     <td>
                       <button type="button" className="btn btn-success me-2">
                         Editar
