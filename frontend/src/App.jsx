@@ -1,16 +1,23 @@
-import './App.css'
+import './App.css';
+import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import Principal from './components/Principal.jsx';
+import CargarProductos from './components/CargarProductos.jsx';
+
 
 function App() {
-  
+
 
   return (
     <>
-      <div className=''>
-        <h1 className='display-1'>Anthony's Garage</h1>
-      </div>
-      
+      <Router>
+        <Routes>
+          <Route path="/" element={<Principal />} />
+          <Route path='/cargar' element={<CargarProductos />} />
+        </Routes>
+      </Router>
     </>
   )
 }
+
 
 export default App
