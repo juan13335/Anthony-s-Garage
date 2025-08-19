@@ -1,14 +1,20 @@
 import './App.css'
-
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import ProductosTabla from './components/ProductosTabla';
+import NavBar from './components/NavBar';
 function App() {
   
 
   return (
     <>
-      <div className=''>
-        <h1 className='display-1'>Anthony's Garage</h1>
-      </div>
-      
+      <>
+      <BrowserRouter>
+      <NavBar/>
+      <Routes>
+        <Route path="/" element={<ProductosTabla />} />
+      </Routes>
+      </BrowserRouter>
+    </>
     </>
   )
 }
