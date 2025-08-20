@@ -11,6 +11,7 @@ export default function CargarProductos() {
 
     async function onSubmit(data) {
         await productosService.postProducto(data);
+        window.alert('Producto creado con exito!');
         reset();
     }
 
@@ -28,9 +29,9 @@ export default function CargarProductos() {
 
     return (
         <>
-            <h2 className='text-center mb-5'>Cargar Productos</h2>
-            <div className="d-flex justify-content-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="w-50">
+            <div className="d-flex justify-content-center mt-5">
+                <form onSubmit={handleSubmit(onSubmit)} className="w-50 p-4 border rounded bg-light shadow">
+                    <h2 className='text-center'>Cargar Productos</h2>
                     <div className="form-group mb-3">
                         <input {...register("nombre")} className='form-control' placeholder="Nombre" />
                     </div>
@@ -42,7 +43,7 @@ export default function CargarProductos() {
                     </div>
                     <div className="form-group mb-3">
                         <select {...register("categoriaId")} className='form-control' placeholder="Categoria" >
-                            <option value="">Seleccione la categoria: </option>
+                            <option value="">Seleccione la categoria</option>
                             {categorias.map(categoria => (
                                 <option key={categoria.id} value={categoria.id}>{categoria.nombre}</option>
                             ))}

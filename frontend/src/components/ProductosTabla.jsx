@@ -27,42 +27,58 @@ function ProductosTabla() {
     return categoria ? categoria.nombre : id;
   }
 
+  async function eliminarProducto(id) {
+    const confirmado = window.confirm('¿Estás seguro que deseas eliminar este producto?')
+    if (!confirmado) return;
+    else{ 
+        await productosService.deleteProducto(id);
+        obtenerProductos();
+      }
+    
+  }
+
     return(
-        <div className="table-responsive">
-          <table className="table table-striped w-100">
-            <thead>
-              <tr>
-                <th scope="col">IdProducto</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Proveedor</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productos &&
-                productos.map((producto) => (
-                  <tr key={producto.id}>
-                    <th scope="row">{producto.id}</th>
-                    <td>{producto.nombre}</td>
-                    <td>{producto.proveedor}</td>
-                    <td>{producto.precio}</td>
-                    <td>{obtenerNombreCategoria(producto.categoriaId)}</td>
-                    <td>
-                      <button type="button" className="btn btn-success me-2">
-                        Editar
-                      </button>
-                      <button type="button" className="btn btn-danger">
-                        Borrar
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+    <div className="d-flex justify-content-center mt-4">
+      <div className="card w-75">
+        <div className="card-body text-center">
+          <div className="table-responsive">
+            <table className="table table-striped ">
+              <thead>
+                <tr>
+                  <th scope="col">IdProducto</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Proveedor</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productos &&
+                  productos.map((producto) => (
+                    <tr key={producto.id}>
+                      <th scope="row">{producto.id}</th>
+                      <td>{producto.nombre}</td>
+                      <td>{producto.proveedor}</td>
+                      <td>{producto.precio}</td>
+                      <td>{obtenerNombreCategoria(producto.categoriaId)}</td>
+                      <td>
+                        <button type="button" className="btn btn-success me-2">
+                          Editar
+                        </button>
+                        <button type="button" className="btn btn-danger" onClick={() => eliminarProducto(producto.id)}>
+                          Borrar
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-    )
+      </div>
+    </div>
+)
 }
 
 export default ProductosTabla;
